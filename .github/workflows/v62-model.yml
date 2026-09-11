@@ -1,4 +1,4 @@
-name: Planetary Restoration Model V62
+name: Planetary Restoration Model V62.2
 
 on:
   workflow_dispatch:
@@ -10,13 +10,13 @@ permissions:
   contents: read
 
 jobs:
-  run-v62:
-    name: Run V62
+  run-v62-2:
+    name: Run V62.2 Complete Model
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 45
 
     steps:
-      - name: Checkout repository
+      - name: Checkout V62.2 repository
         uses: actions/checkout@v7
 
       - name: Set up Python
@@ -24,35 +24,206 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Verify flat V62 package
+      # ------------------------------------------------------------
+      # V62.2 is intentionally an overlay on the full V62.1 model.
+      # Restore the proven V62.1 runtime lineage at the exact
+      # successful Run-12 commit without overwriting any V62.2 file.
+      # ------------------------------------------------------------
+      - name: Restore pinned V62.1 runtime lineage
         run: |
+          set -euo pipefail
+
+          V621_COMMIT="801982af3d27a2638e8a7fb448f81701f76ae637"
+          V621_DIR="/tmp/planetary-v621"
+
+          rm -rf "$V621_DIR"
+          mkdir -p "$V621_DIR"
+
+          git -C "$V621_DIR" init
+          git -C "$V621_DIR" remote add origin \
+            https://github.com/bcjohnjr/Planetary-Restoration-Model-V62.1.git
+
+          git -C "$V621_DIR" fetch \
+            --depth=1 \
+            origin \
+            "$V621_COMMIT"
+
+          git -C "$V621_DIR" checkout --detach FETCH_HEAD
+
+          ACTUAL_COMMIT="$(git -C "$V621_DIR" rev-parse HEAD)"
+
+          if [ "$ACTUAL_COMMIT" != "$V621_COMMIT" ]; then
+            echo "ERROR: V62.1 lineage commit mismatch."
+            echo "Expected: $V621_COMMIT"
+            echo "Actual:   $ACTUAL_COMMIT"
+            exit 1
+          fi
+
+          echo "Pinned V62.1 source verified:"
+          echo "$ACTUAL_COMMIT"
+
+          # Copy ONLY files that do not already exist in V62.2.
+          # V62.2 files therefore always remain authoritative.
+          rsync -a \
+            --ignore-existing \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='results/' \
+            "$V621_DIR/" \
+            ./
+
+          echo "V62.1 runtime lineage restored."
+
+      - name: Verify V62.2 and inherited runtime
+        run: |
+          set -euo pipefail
+
+          echo "Checking V62.2 authoritative files..."
+
+          test -f planetary_restoration_model_v62_2.py
+          test -f test_planetary_restoration_model_v62_2.py
+          test -f RUN_TESTS_V62_2.sh
+          test -f v62_2_matched_validation.json
+
+          echo "Checking inherited V62 runtime..."
+
           test -f planetary_restoration_model_v62.py
           test -f planetary_restoration_model_v59_1.py
           test -f requirements.txt
-          test -f RUN_TESTS.sh
-          echo "Flat V62 package structure verified."
+
+          echo "Checking inherited validation data..."
+
+          test -f fair_feedback_sensitivity_summary.json
+          test -f hector_feedback_sensitivity_summary.json
+          test -f inverse_solutions.csv
+          test -f feedback_attribution_comparison.csv
+          test -f fair_feedback_attribution_selected.csv
+
+          echo "Checking older model lineage..."
+
+          test -f previous_version_v59.py
+          test -f previous_version_v58.py
+          test -f previous_version_v57.py
+          test -f planetary_restoration_model_v53_1.py
+
+          echo "V62.2 runtime package verified."
 
       - name: Install dependencies
         run: |
+          set -euo pipefail
+
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          python -m pip install -r requirements.txt
 
-      - name: Run V62 test suite
+          python - <<'PY'
+          import numpy
+          import pandas
+          import matplotlib
+          import fair
+          import docx
+          import openpyxl
+
+          print("Python dependency verification PASSED")
+          print("numpy:", numpy.__version__)
+          print("pandas:", pandas.__version__)
+          print("matplotlib:", matplotlib.__version__)
+          print("fair:", fair.__version__)
+          PY
+
+      - name: Compile V62.2
         run: |
-          bash RUN_TESTS.sh
+          set -euo pipefail
 
-      - name: Run complete V62 model
+          python -m py_compile \
+            planetary_restoration_model_v62_2.py \
+            test_planetary_restoration_model_v62_2.py \
+            planetary_restoration_model_v62.py \
+            planetary_restoration_model_v59_1.py
+
+          echo "V62.2 compilation PASSED."
+
+      - name: Run complete V62.2 model and tests
         run: |
-          python planetary_restoration_model_v62.py --tests
+          set -euo pipefail
 
-      - name: Show generated results
+          rm -rf results
+          mkdir -p results
+
+          bash RUN_TESTS_V62_2.sh
+
+      - name: Verify V62.2 results
         run: |
-          echo "Generated result files:"
-          find results -maxdepth 2 -type f -print
+          set -euo pipefail
 
-      - name: Upload V62 results
+          test -f results/planetary_restoration_v62_2_results.json
+          test -f results/v62_2_module_registry.csv
+          test -f results/v62_2_restoration_milestones.csv
+          test -f results/v62_2_finance_stress.csv
+          test -f results/v62_2_robot_doctor_scenarios.csv
+          test -f results/v62_2_robot_lawyer_scenarios.csv
+          test -f results/v62_2_matched_forcing_cross_model_milestones.csv
+          test -f results/v62_2_completeness_gate.json
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          gate = json.loads(
+              Path("results/v62_2_completeness_gate.json").read_text(
+                  encoding="utf-8"
+              )
+          )
+
+          print(json.dumps(gate, indent=2))
+
+          if not gate.get("pass"):
+              raise SystemExit(
+                  "V62.2 completeness gate FAILED: "
+                  + str(gate.get("missing"))
+              )
+
+          result = json.loads(
+              Path(
+                  "results/planetary_restoration_v62_2_results.json"
+              ).read_text(encoding="utf-8")
+          )
+
+          if result.get("model_version") != "62.2":
+              raise SystemExit(
+                  "Wrong model version in generated results: "
+                  + str(result.get("model_version"))
+              )
+
+          print()
+          print("========================================")
+          print("V62.2 COMPLETE MODEL PASSED")
+          print("========================================")
+          print("Model version:", result["model_version"])
+          print(
+              "Registry modules:",
+              gate.get("registry_count")
+          )
+          print(
+              "Required modules:",
+              gate.get("required_count")
+          )
+          PY
+
+      - name: Show generated result files
+        if: always()
+        run: |
+          echo "Generated V62.2 result files:"
+          if [ -d results ]; then
+            find results -maxdepth 2 -type f -print | sort
+          else
+            echo "No results directory exists."
+          fi
+
+      - name: Upload V62.2 results
+        if: success()
         uses: actions/upload-artifact@v7
         with:
-          name: Planetary-Restoration-V62-Results
+          name: Planetary-Restoration-V62.2-Complete-Results
           path: results/
           if-no-files-found: error
+          retention-days: 90
