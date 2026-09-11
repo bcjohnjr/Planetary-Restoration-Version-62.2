@@ -83,10 +83,12 @@ jobs:
         run: |
           python - <<'PYNETCDF'
           import xarray as xr
+
           f = "_oscar/input_data/parameters/from_OSCARv2/ocean_CMIP5.nc"
           ds = xr.open_dataset(f)
           print(ds)
           ds.close()
+
           print("OSCAR NetCDF parameter file successfully opened.")
           PYNETCDF
 
@@ -97,7 +99,7 @@ jobs:
             --trajectory external_validation_net_co2_trajectory.csv \
             --outdir oscar_results \
             --nmc 200 \
-            --end-year 2300
+            --end-year 2183
 
       - name: Show OSCAR validation summary
         if: always()
@@ -124,4 +126,3 @@ jobs:
           name: OSCAR-V62-External-Validation
           path: oscar_results/
           if-no-files-found: warn
-          
