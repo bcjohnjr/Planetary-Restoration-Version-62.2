@@ -1,0 +1,30 @@
+{
+  "repository": "bcjohnjr/Planetary-Restoration-Model-V62.1",
+  "workflow": "V62 Matched Forcing — FaIR + Hector",
+  "run_id": 34617229257,
+  "run_number": 12,
+  "head_commit": "801982af3d27a2638e8a7fb448f81701f76ae637",
+  "status": "completed",
+  "conclusion": "success",
+  "jobs": {
+    "FaIR 2.2.4 matched non-CO2 forcing": "success",
+    "Hector 3.5.0 matched non-CO2 forcing": "success",
+    "Compare matched FaIR + Hector": "success"
+  },
+  "artifacts": {
+    "v62-fair-matched-forcing": {
+      "artifact_id": 10271022330,
+      "sha256": "e21337c578bd7772aff073d940f1ae04673bc97a3da485936a8852853ca21ef0"
+    },
+    "v62-hector-matched-forcing": {
+      "artifact_id": 10271042885,
+      "sha256": "0714c62f7f3b28ac2a9da03fdb2837bbb48b8ae533fc601b1d7653148f5f832b"
+    },
+    "V62-Matched-Forcing-Cross-Model-Comparison": {
+      "artifact_id": 10270714636,
+      "sha256": "53662ca22ad2d327f693c07d0156f7476ea16186bd86b8ea92ca03ba35576d29"
+    }
+  },
+  "created_for_model_version": "62.2",
+  "date": "2026-09-11"
+}

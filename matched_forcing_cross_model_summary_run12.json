@@ -1,0 +1,113 @@
+{
+  "experiment": "V62 matched future non-CO2 forcing cross-model comparison",
+  "models": {
+    "FaIR": {
+      "version": "2.2.4",
+      "configs": 841
+    },
+    "Hector": {
+      "version": "3.5.0"
+    }
+  },
+  "forcing_target": "median FaIR medium-extension non-CO2 ERF; same scalar target imposed on all FaIR configs and exported to Hector",
+  "forcing_match_gates": {
+    "fair_on_max_abs_wm2": 6.678223662959226e-08,
+    "fair_off_max_abs_wm2": 7.579995364714875e-08,
+    "hector_on_max_abs_wm2": 9.93048642916605e-06,
+    "hector_off_max_abs_wm2": 9.11541855386222e-06
+  },
+  "common_state_within_model_2026": {
+    "fair_co2_maxabs_ppm": 0.0,
+    "fair_tas_maxabs_c": 0.0,
+    "hector_co2_abs_error_ppm": 0,
+    "hector_tas_abs_error_c": 0
+  },
+  "milestones": [
+    {
+      "year": 2040,
+      "fair_delta_co2_p05_ppm": 6.840963951680124,
+      "fair_delta_co2_p50_ppm": 7.442344475414984,
+      "fair_delta_co2_p95_ppm": 7.885757176382981,
+      "hector_delta_co2_ppm": 8.52184464933327,
+      "hector_minus_fair_p50_delta_ppm": 1.0795001739182855,
+      "fair_response_fraction_p05": 0.65433189291016,
+      "fair_response_fraction_p50": 0.7118533853831749,
+      "fair_response_fraction_p95": 0.7542654012941109,
+      "hector_response_fraction": 0.706425703924333,
+      "hector_minus_fair_p50_fraction": -0.005427681458841871,
+      "hector_inside_fair_p05_p95_fraction": true
+    },
+    {
+      "year": 2100,
+      "fair_delta_co2_p05_ppm": 50.48684217659462,
+      "fair_delta_co2_p50_ppm": 59.95222490337653,
+      "fair_delta_co2_p95_ppm": 66.70011228839206,
+      "hector_delta_co2_ppm": 56.6968643578239,
+      "hector_minus_fair_p50_delta_ppm": -3.2553605455526338,
+      "fair_response_fraction_p05": 0.3976839911702797,
+      "fair_response_fraction_p50": 0.4722426488017909,
+      "fair_response_fraction_p95": 0.5253956421669537,
+      "hector_response_fraction": 0.439833559392382,
+      "hector_minus_fair_p50_fraction": -0.0324090894094089,
+      "hector_inside_fair_p05_p95_fraction": true
+    },
+    {
+      "year": 2156,
+      "fair_delta_co2_p05_ppm": 78.84117353607883,
+      "fair_delta_co2_p50_ppm": 96.06579901466311,
+      "fair_delta_co2_p95_ppm": 107.51712827930714,
+      "hector_delta_co2_ppm": 82.5413926164705,
+      "hector_minus_fair_p50_delta_ppm": -13.52440639819261,
+      "fair_response_fraction_p05": 0.3342956969067729,
+      "fair_response_fraction_p50": 0.40733010164818,
+      "fair_response_fraction_p95": 0.4558850625314207,
+      "hector_response_fraction": 0.347669363322542,
+      "hector_minus_fair_p50_fraction": -0.05966073832563801,
+      "hector_inside_fair_p05_p95_fraction": true
+    },
+    {
+      "year": 2184,
+      "fair_delta_co2_p05_ppm": 77.09326505857325,
+      "fair_delta_co2_p50_ppm": 95.72174134509991,
+      "fair_delta_co2_p95_ppm": 108.47008275432074,
+      "hector_delta_co2_ppm": 76.4743802035163,
+      "hector_minus_fair_p50_delta_ppm": -19.24736114158361,
+      "fair_response_fraction_p05": 0.2979199170571231,
+      "fair_response_fraction_p50": 0.369907970825063,
+      "fair_response_fraction_p95": 0.4191727777101438,
+      "hector_response_fraction": 0.294756169662706,
+      "hector_minus_fair_p50_fraction": -0.07515180116235698,
+      "hector_inside_fair_p05_p95_fraction": false
+    },
+    {
+      "year": 2200,
+      "fair_delta_co2_p05_ppm": 77.2193980405437,
+      "fair_delta_co2_p50_ppm": 96.34298415720924,
+      "fair_delta_co2_p95_ppm": 110.1182546469048,
+      "hector_delta_co2_ppm": 76.2961021672871,
+      "hector_minus_fair_p50_delta_ppm": -20.04688198992214,
+      "fair_response_fraction_p05": 0.2864034597117178,
+      "fair_response_fraction_p50": 0.3573320264305659,
+      "fair_response_fraction_p95": 0.4084239181938516,
+      "hector_response_fraction": 0.282269325222151,
+      "hector_minus_fair_p50_fraction": -0.0750627012084149,
+      "hector_inside_fair_p05_p95_fraction": false
+    },
+    {
+      "year": 2300,
+      "fair_delta_co2_p05_ppm": 86.03276943968268,
+      "fair_delta_co2_p50_ppm": 103.7870920635752,
+      "fair_delta_co2_p95_ppm": 123.9726890279718,
+      "hector_delta_co2_ppm": 83.4866473767365,
+      "hector_minus_fair_p50_delta_ppm": -20.300444686838702,
+      "fair_response_fraction_p05": 0.2549847173377827,
+      "fair_response_fraction_p50": 0.3076051428484476,
+      "fair_response_fraction_p95": 0.3674314017237897,
+      "hector_response_fraction": 0.246942377588316,
+      "hector_minus_fair_p50_fraction": -0.06066276526013159,
+      "hector_inside_fair_p05_p95_fraction": false
+    }
+  ],
+  "interpretation": "Future non-CO2 forcing is now harmonized between FaIR and Hector from 2027 onward. Differences in paired CO2 response therefore reflect model carbon-cycle/climate-response structure rather than different prescribed future non-CO2 forcing pathways. Historical states and model parameters remain model-specific, so this is not an identity test.",
+  "cross_model_closeness_is_not_a_failure_gate": true
+}

@@ -1,0 +1,119 @@
+{
+  "model": "FaIR",
+  "version": "2.2.4",
+  "calibration": "fair-calibrate 1.4.1",
+  "configs": 841,
+  "experiment": "V62 removal-ON/OFF with harmonized non-CO2 ERF after 2026",
+  "matched_nonco2_target": "median FaIR medium-extension non-CO2 ERF; same scalar target imposed on all FaIR configs and exported to Hector",
+  "adjustment_bookkeeping_species": "Matched non-CO2 forcing adjustment",
+  "bookkeeping_warning": "The synthetic unspecified species is only an additive forcing carrier and has no physical interpretation.",
+  "match_starts": 2027,
+  "canonical_cdr_2026_2183_gtco2": 2013.8807318595145,
+  "peak_cdr_2026_2183_gtco2_per_year": 15.2,
+  "trajectory_mass_balance_max_abs_gtco2": 7.105427357601002e-15,
+  "common_state_2026_co2_maxabs_ppm": 0.0,
+  "common_state_2026_tas_maxabs_c": 0.0,
+  "forcing_match_max_abs_on_wm2": 6.678223662959226e-08,
+  "forcing_match_max_abs_off_wm2": 7.579995364714875e-08,
+  "forcing_match_on_vs_off_max_abs_wm2": 1.5488489157888807e-08,
+  "forcing_match_tolerance_wm2": 1e-07,
+  "fit_iterations_on": [
+    {
+      "iteration": 1,
+      "max_abs_nonco2_forcing_error_wm2": 1.0593462264143456
+    },
+    {
+      "iteration": 2,
+      "max_abs_nonco2_forcing_error_wm2": 0.05058107493666453
+    },
+    {
+      "iteration": 3,
+      "max_abs_nonco2_forcing_error_wm2": 0.002979677404466363
+    },
+    {
+      "iteration": 4,
+      "max_abs_nonco2_forcing_error_wm2": 0.0002001690746520346
+    },
+    {
+      "iteration": 5,
+      "max_abs_nonco2_forcing_error_wm2": 1.3646432693192878e-05
+    },
+    {
+      "iteration": 6,
+      "max_abs_nonco2_forcing_error_wm2": 9.527534254871739e-07
+    },
+    {
+      "iteration": 7,
+      "max_abs_nonco2_forcing_error_wm2": 6.678223662959226e-08
+    }
+  ],
+  "fit_iterations_off": [
+    {
+      "iteration": 1,
+      "max_abs_nonco2_forcing_error_wm2": 1.0209047371662578
+    },
+    {
+      "iteration": 2,
+      "max_abs_nonco2_forcing_error_wm2": 0.04688861814122025
+    },
+    {
+      "iteration": 3,
+      "max_abs_nonco2_forcing_error_wm2": 0.003028383926392042
+    },
+    {
+      "iteration": 4,
+      "max_abs_nonco2_forcing_error_wm2": 0.00020412111254630716
+    },
+    {
+      "iteration": 5,
+      "max_abs_nonco2_forcing_error_wm2": 1.4341713489685048e-05
+    },
+    {
+      "iteration": 6,
+      "max_abs_nonco2_forcing_error_wm2": 1.0629578472975965e-06
+    },
+    {
+      "iteration": 7,
+      "max_abs_nonco2_forcing_error_wm2": 7.579995364714875e-08
+    }
+  ],
+  "milestones": {
+    "2040": {
+      "delta_co2_p50_ppm": 7.442344475414984,
+      "response_fraction_p05": 0.65433189291016,
+      "response_fraction_p50": 0.7118533853831749,
+      "response_fraction_p95": 0.7542654012941109
+    },
+    "2100": {
+      "delta_co2_p50_ppm": 59.95222490337653,
+      "response_fraction_p05": 0.3976839911702797,
+      "response_fraction_p50": 0.4722426488017909,
+      "response_fraction_p95": 0.5253956421669537
+    },
+    "2156": {
+      "delta_co2_p50_ppm": 96.06579901466313,
+      "response_fraction_p05": 0.3342956969067729,
+      "response_fraction_p50": 0.40733010164818007,
+      "response_fraction_p95": 0.4558850625314207
+    },
+    "2184": {
+      "delta_co2_p50_ppm": 95.72174134509993,
+      "response_fraction_p05": 0.2979199170571231,
+      "response_fraction_p50": 0.36990797082506305,
+      "response_fraction_p95": 0.4191727777101438
+    },
+    "2200": {
+      "delta_co2_p50_ppm": 96.34298415720923,
+      "response_fraction_p05": 0.2864034597117178,
+      "response_fraction_p50": 0.3573320264305659,
+      "response_fraction_p95": 0.40842391819385165
+    },
+    "2300": {
+      "delta_co2_p50_ppm": 103.78709206357519,
+      "response_fraction_p05": 0.2549847173377827,
+      "response_fraction_p50": 0.30760514284844764,
+      "response_fraction_p95": 0.36743140172378974
+    }
+  },
+  "interpretation_boundary": "This experiment removes future non-CO2 forcing differences as a cross-model confounder. It does not force FaIR and Hector to have identical carbon-cycle parameters or identical historical carbon pools."
+}
